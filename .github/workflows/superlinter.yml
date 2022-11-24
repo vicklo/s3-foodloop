@@ -1,32 +1,18 @@
 
-name: Lint Code Base
+name: Superlinter.yml
 
-on:
-  push:
-    branches-ignore: [master, main]
-    # Remove the line above to run when pushing to master
-  pull_request:
-    branches: [master, main]
+on: push
 
 jobs:
-  build:
-    # Name the Job
-    name: Lint Code Base
-    # Set the agent to run on
+  super-lint:
+    name: Lint code base
     runs-on: ubuntu-latest
-    
     steps:
-    
-      - name: Checkout Code
-        uses: actions/checkout@v3
-        with:
-          # Full git history is needed to get a proper
-          # list of changed files within `super-linter`
-          fetch-depth: 0
+      - name: Checkout code
+        uses: actions/checkout@v2
 
-      - name: Lint Code Base
-        uses: github/super-linter@v4
+      - name: Run Super-Linter
+        uses: github/super-linter@v3
         env:
-          VALIDATE_ALL_CODEBASE: false
-          DEFAULT_BRANCH: master
+          DEFAULT_BRANCH: main
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
