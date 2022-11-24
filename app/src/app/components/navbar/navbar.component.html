@@ -1,0 +1,45 @@
+<nav class="navbar navbar-expand-lg navbar-light bg-danger text-white shadow" *ngIf="activeRouter.url != '/register'">
+  <div class="container-fluid">
+    <img src="assets/logo.png" height="50" alt="logo" />
+    <div class="spacer"></div>
+    <ul class="navbar-nav">
+      <span *ngFor="let route of routes">
+          <span *ngIf="(auth.isAuthenticated$ | async) == false">
+            <li class="m-2" *ngIf="!route.data" >
+              <a
+                class="fas fa-bars"
+                routerLink="{{ route.path }}"
+                ariaCurrentWhenActive="page"
+                >{{ route.title }}</a
+              >
+            </li>
+          </span>
+          <span *ngIf="(auth.isAuthenticated$ | async) == true">
+            <span *ngIf="route.path != 'register'">
+              <li class="m-2" *ngIf="route.path != 'shopping-cart' or">
+                <a
+                  class="fas fa-bars"
+                  routerLink="{{ route.path }}"
+                  ariaCurrentWhenActive="page"
+                  >{{ route.title }}</a
+                >
+              </li>
+              <li class="m-2" *ngIf="route.path == 'shopping-cart'">
+                <a
+                  class="fas fa-bars"
+                  routerLink="{{ route.path }}"
+                  ariaCurrentWhenActive="page"
+                  ><fa-icon style="font-size:medium;" class="w-full align-right" [icon]="faCartShopping"></fa-icon>{{shoppingList.length}}</a
+                >
+              </li>
+            </span>
+            
+          </span>
+
+      </span>
+      <li class="nav-item">
+        <app-login-button></app-login-button>
+      </li>
+    </ul>
+  </div>
+</nav>

@@ -1,0 +1,16 @@
+{
+  "name": "foodloop",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "api dev": "npx nodemon api/src/app.ts",
+    "font dev": "npx nodemon api/src/app.ts"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "nodemon": "^2.0.20"
+  }
+}

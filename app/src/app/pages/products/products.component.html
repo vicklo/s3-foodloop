@@ -1,0 +1,128 @@
+<div class="p-5">
+  <!-- pop up -->
+  <ng-template #content let-modal>
+    <div class="modal-header">
+      <h4 class="modal-title" id="modal-basic-title">Create new product</h4>
+      <button
+        type="button"
+        class="btn-close"
+        aria-label="Close"
+        (click)="modal.dismiss('Cross click')"
+      ></button>
+    </div>
+    <div class="modal-body">
+      <form [formGroup]="productForm">
+        <label for="name" class="form-label">Name: </label>
+        <input
+          class="form-control"
+          id="name"
+          type="text"
+          formControlName="name"
+        />
+        <label for="description" class="form-label">Description: </label>
+        <textarea
+          id="description"
+          class="form-control"
+          type="text"
+          formControlName="description"
+        ></textarea>
+        <label for="url" class="form-label">FotoUrl</label>
+        <input
+          id="url"
+          type="text"
+          class="form-control"
+          formControlName="url"
+        />
+      </form>
+    </div>
+    <div class="modal-footer">
+      <button
+        type="button"
+        class="btn btn-outline-dark"
+        (click)="postProduct()"
+      >
+        Save
+      </button>
+    </div>
+  </ng-template>
+
+  <!-- Buttons and search -->
+  <div class="input-group mb-3">
+    <input
+      type="text"
+      (input)="SearchBarChange($event)"
+      class="form-control"
+      placeholder="Search products"
+      aria-label="Search products"
+      aria-describedby="basic-addon2"
+    />
+    <button
+      type="button"
+      class="btn btn-outline-primary"
+      (click)="searchProducts(searchWord)"
+    >
+      search
+    </button>
+  </div>
+  <button class="btn btn-primary m-1" (click)="RefreshAllProducts()">
+    Refresh
+  </button>
+  <button class="btn btn-primary m-1" (click)="open(content)">
+    Create Product</button
+  ><br />
+
+  <div class="d-flex justify-content-center" *ngIf="loading">
+    <div class="spinner-grow" role="status">
+      <span class="visually-hidden">Loading...</span>
+    </div>
+  </div>
+
+  <!-- all cards -->
+  <div class="row row-cols-1 row-cols-md-6 g-4 mt-1">
+    <div class="col" *ngFor="let product of products">
+      <div class="card shadow">
+        <div class="card-body">
+          <div class="d-flex">
+            <div class="p-2 flex-grow-1"></div>
+            <fa-icon
+              (click)="deleteProduct(product.id!)"
+              style="color: red; font-size: medium"
+              class="w-full align-right"
+              [icon]="faCircleXmark"
+            ></fa-icon>
+          </div>
+          <h5 class="card-title">{{ product.name }}</h5>
+          <p class="card-text">{{ product.description }}</p>
+        </div>
+        <div class="card-footer p-0" *ngIf="product.amountIncart == 0">
+          <button
+            (click)="editCart(product,product.amountIncart + 1)"
+            class="rounded-bottom btn btn-danger w-100"
+            style="border-radius: 0px"
+          >Add to cart</button>
+        </div>
+        <div class="card-footer p-0" *ngIf="product.amountIncart != 0">
+          <div class="container text-center m-0">
+            <div class="row">
+              <button class="col btn btn-danger btn-md" style="border-radius:  0px 0px 0px .375rem;" (click)="editCart(product, - 1)">
+                <fa-icon
+                  class="w-full align-right"
+                  [icon]="faMinus"
+                ></fa-icon>
+              </button>
+              <div class="col-6">
+                <div class="fs-5">{{product.amountIncart}}</div>
+              </div>
+              <button class="col btn btn-danger btn-md" style="border-radius:  0px 0px .375rem 0px; " (click)="editCart(product, + 1)">
+                <fa-icon
+                  
+                  [icon]="faPlus"
+                ></fa-icon>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

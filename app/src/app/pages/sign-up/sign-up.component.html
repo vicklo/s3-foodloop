@@ -1,0 +1,51 @@
+<section class="vh-100">
+    <div class="container-fluid h-custom">
+      <div class="row d-flex justify-content-center align-items-center h-100">
+        <div class="col-md-9 col-lg-6 col-xl-5">
+          <img src="assets/login.png"
+            class="img-fluid" alt="Sample image">
+        </div>
+        <div class="col-md-8 col-lg-6 col-xl-4 offset-xl-1">
+          <form [formGroup]="companyForm">
+            <h5 class="card-title w-100 text-center">Welcome {{userInfo.name}}</h5>
+            <hr/>
+               <h5 class="card-title w-100 text-center">Company info</h5>
+            <!-- Password input -->
+
+               
+            <div class="form-outline mb-3">
+                <label class="form-label" for="form3Example4">Company dubscription</label>
+                <select  formControlName="subscription" class="form-select form-control-lg" aria-label="Default select example">
+                    <option selected>Free</option>
+                    <option value="1">Retailer</option>
+                    <option value="2">Brand</option>
+                  </select>
+              </div>
+           
+              
+              <div class="form-outline mb-3">
+                <label class="form-label" for="form3Example4">Company name</label>
+                <input formControlName="name" type="" id="form3Example4" class="form-control form-control-lg"
+                  placeholder="Enter company name" />
+              </div>              
+              <div class="form-outline mb-3">
+                <label class="form-label" for="form3Example4">Company adress</label>
+                <input formControlName="adress" type="" id="form3Example4" class="form-control form-control-lg"
+                  placeholder="Enter company adress" />
+              </div>              
+              <div class="form-outline mb-3">
+                <label class="form-label" for="form3Example4">Company postcode</label>
+                <input formControlName="postcode" type="" id="form3Example4" class="form-control form-control-lg"
+                  placeholder="Enter company postcode" />
+              </div>
+  
+            <div class="text-center text-lg-start mt-4 pt-2">
+              <button type="button" class="btn btn-danger w-100">Login</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </section>
+
+<!-- https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS48L_HvM1VQ_ZcVCvhTBIIchwSPQg20dpb7A&usqp=CAU -->
