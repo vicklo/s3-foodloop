@@ -2,7 +2,7 @@ import { DebugElement, Injectable } from '@angular/core';
 import { AuthService } from '@auth0/auth0-angular';
 import axios, { AxiosResponse } from 'axios';
 import { BehaviorSubject } from 'rxjs';
-import { environment } from 'src/environments/environment';
+import { environment } from '../../environments/environment';
 import { postProductDto } from '../dto/postproduct.dto';
 import { productShop } from '../dto/productShop.dto';
 import { AuthenticateService } from './authenticate.service';
