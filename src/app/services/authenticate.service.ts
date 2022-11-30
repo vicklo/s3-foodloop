@@ -22,7 +22,8 @@ export class AuthenticateService {
       },
       {headers}).then(data => 
         {
-          token = data.data})
+          token = data.data
+        })
     console.log(token)
     return token;
   }

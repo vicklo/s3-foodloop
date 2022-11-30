@@ -1,6 +1,6 @@
 import { DebugElement, Injectable } from '@angular/core';
 import { AuthService } from '@auth0/auth0-angular';
-import axios from 'axios';
+import axios, { AxiosResponse } from 'axios';
 import { BehaviorSubject } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { postProductDto } from '../dto/postproduct.dto';
@@ -49,9 +49,9 @@ export class ProductService {
   { 
     const products:Array<productShop> = new Array<productShop>()
     await axios.get(`${environment.apiBaseUrl}/products`)
-      .then(data => 
+      .then(response => 
         {
-            data.data.forEach((product: productShop) => {
+            response.data.forEach((product: productShop) => {
               let added = false;
               this.shoppingCartList.forEach(cartProduct =>
                 {
@@ -70,22 +70,37 @@ export class ProductService {
             });
             this.productsLoading = false;
         })
+        .catch(error => 
+          {
+            console.log(error)
+          })
     return products
   }
 
-  public async PostProduct(product: postProductDto): Promise<any>
+  public async PostProduct(product: postProductDto): Promise<AxiosResponse>
   {
-    let response;
-    await axios.post(`${environment.apiBaseUrl}/product`,product,)
+    let response = {}
+    if(!product.company)
+      return Promise.reject("Company must be filled")
+    if(!product.description)
+      return Promise.reject('Description must be filled');
+    if(!product.name)
+      return Promise.reject('Name must be filled');
+    if(!product.url)
+      return Promise.reject('Url must be filled');
+      
+    await axios.post(`${environment.apiBaseUrl}/product`,product)
       .then(data => response = data)
-    return response;
+      .catch(error => console.log(error))
+    return response as AxiosResponse;
   }
 
-  public async DeleteProduct(productId: number): Promise<any>
+  public async DeleteProduct(productId: number): Promise<AxiosResponse>
   {
-    let response;
+    let response = {};
     await axios.delete(`${environment.apiBaseUrl}/product/${productId}`)
       .then(data => response = data)
-    return response;
+      .catch(error => {throw new Error(error)})
+    return response as AxiosResponse;
   }
 }

@@ -7,6 +7,7 @@ import { faCircleXmark, faPlus, faMinus } from '@fortawesome/free-solid-svg-icon
 import { productShop } from 'src/app/dto/productShop.dto';
 import { ShoppingCartService } from 'src/app/services/shopping-cart.service';
 import { UserService } from 'src/app/services/user.service';
+import { AxiosResponse } from 'axios';
 
 @Component({
   selector: 'app-products',
@@ -37,7 +38,6 @@ export class ProductsComponent implements OnInit {
     (productList) =>
     {
       this.allProducts = productList;
-      //this.products = JSON.parse(JSON.stringify(this.allProducts)); 
       this.products = this.allProducts
       this.loading = this.productService.productsLoading
      
@@ -46,14 +46,6 @@ export class ProductsComponent implements OnInit {
 
   async RefreshAllProducts()
   {
-    // this.loading =  true;
-    // await this.productService.getAllProducts().then(data => 
-    //   {
-    //     this.allProducts = data;
-    //     this.products = JSON.parse(JSON.stringify(this.allProducts)); 
-    //     this.loading = false;
-    //     console.log(data);
-    //   })
     this.loading = true;
     await this.productService.refreshList()
   }
@@ -74,34 +66,41 @@ export class ProductsComponent implements OnInit {
     this.products = this.allProducts.filter(x => (x.name as string).toLowerCase().includes(Text));
   }
 
-  public async postProduct(): Promise<void>
+  public async postProduct(): Promise<AxiosResponse>
   {
-    const response = await this.productService.PostProduct(this.productForm.value as postProductDto)
-    if(response.status == 200)
+    try
     {
-      this.modalService.dismissAll()
-      this.allProducts.push(response.data)
-      this.searchProducts(this.searchWord)
-      this.productForm.reset()
+      const response: AxiosResponse = await this.productService.PostProduct(this.productForm.value as postProductDto)
+      if(response.status == 200)
+      {
+        this.modalService.dismissAll()
+        this.allProducts.push(response.data)
+        this.searchProducts(this.searchWord)
+        this.productForm.reset()
+        return response
+      }
     }
-    console.log(response)
+    catch(error)
+    {
+      console.log(error)
+    }
+    return {} as AxiosResponse
   }
 
   public async deleteProduct(productId: number)
   {
-    const response = await  this.productService.DeleteProduct(productId)
+    const response: AxiosResponse = await  this.productService.DeleteProduct(productId)
     if(response.status == 200)
     {
       const newlist = this.allProducts.filter(x => x.id != productId) 
       this.allProducts = newlist
       this.searchProducts(this.searchWord)
-      console.log('deleted')
     }
   }
 
   public editCart(product: productShop, newAmount: number)
   {
-    product.amountIncart = product.amountIncart as  number +  newAmount;
+    product.amountIncart = product.amountIncart as number +  newAmount;
     this.shoppingCartService.editList(product)
   }
 

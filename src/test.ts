@@ -6,6 +6,7 @@ import {
   BrowserDynamicTestingModule,
   platformBrowserDynamicTesting
 } from '@angular/platform-browser-dynamic/testing';
+import { AuthModule } from '@auth0/auth0-angular';
 
 declare const require: {
   context(path: string, deep?: boolean, filter?: RegExp): {

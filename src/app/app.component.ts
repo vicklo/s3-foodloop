@@ -11,7 +11,5 @@ import { UserService } from './services/user.service';
 export class AppComponent {
   
   constructor(public auth: AuthService, public router: Router,private userService: UserService){}
-  title = 'app';
-
-
+  title = 'foodloop';
 }

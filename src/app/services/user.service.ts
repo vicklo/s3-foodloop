@@ -29,7 +29,7 @@ export class UserService {
           u.CompanyId = userDB.CompanyId
           if(!userDB)
           {
-            this.router.navigateByUrl("register")
+            //this.router.navigateByUrl("register")
             // await this.postUser({
               
             // })
