@@ -1,5 +1,5 @@
-import { Component, OnInit } from '@angular/core';
-import { ModalDismissReasons, NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { Component } from '@angular/core';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ProductService } from 'src/app/services/product.service';
 import { FormGroup, FormControl } from '@angular/forms';
 import { PostProductDto } from 'src/app/dto/postproduct.dto';

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { faMinus, faPlus } from '@fortawesome/free-solid-svg-icons';
 import { ProductShop } from 'src/app/dto/productShop.dto';
 import { UserDto } from 'src/app/dto/user.dto';

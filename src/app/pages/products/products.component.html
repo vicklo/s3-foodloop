@@ -79,7 +79,7 @@
 
   <!-- all cards -->
   <div class="row row-cols-1 row-cols-md-6 g-4 mt-1">
-    <div class="col" *ngFor="let product of products">
+    <div class="col"  *ngFor="let product of products">
       <div class="card shadow">
         <div class="card-body">
           <div class="d-flex">
@@ -91,8 +91,10 @@
               [icon]="faCircleXmark"
             ></fa-icon>
           </div>
-          <h5 class="card-title">{{ product.name }}</h5>
-          <p class="card-text">{{ product.description }}</p>
+          <h5 class="card-title" style="height: 70px">{{ product.name }}</h5>
+          <p class="card-text" style="height: 80px">{{ product.description }}</p>
+          <h5 class="card-title" >€{{ product.price }}</h5>
+
         </div>
         <div class="card-footer p-0" *ngIf="product.amountIncart == 0">
           <button

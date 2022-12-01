@@ -1,6 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { AuthService } from '@auth0/auth0-angular';
-import { UserDto } from 'src/app/dto/user.dto';
 
 @Component({
   selector: 'app-login-button',

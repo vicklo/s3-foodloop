@@ -7,7 +7,6 @@ import { AppComponent } from './app.component';
 import { AuthModule } from '@auth0/auth0-angular';
 import {environment as env} from '../environments/environment'
 import { LoginButtonComponent } from './components/login-button/login-button.component';
-import { HomeComponent } from './pages/home/home.component';
 import { NavbarComponent } from './components/navbar/navbar.component';
 import { ProductsComponent } from './pages/products/products.component';
 import { CompanyComponent } from './pages/company/company.component';

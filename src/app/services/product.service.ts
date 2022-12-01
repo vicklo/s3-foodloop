@@ -63,7 +63,6 @@ export class ProductService {
               if(!added)
               {
                 product.amountIncart = 0;
-                product.price = Math.floor(Math.random() * 100)
                 products.push(product);
               }
             });
