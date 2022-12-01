@@ -82,7 +82,7 @@ export class ProductsComponent {
     }
     catch(error)
     {
-      throw error
+      return Promise.reject(error)
     }
     return {} as AxiosResponse
   }

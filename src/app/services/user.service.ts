@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthService } from '@auth0/auth0-angular';
 import axios from 'axios';
-import { BehaviorSubject, Observable, of} from 'rxjs';
+import { BehaviorSubject} from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { UserDto } from '../dto/user.dto';
 
@@ -28,7 +28,7 @@ export class UserService {
           u.CompanyId = userDB.CompanyId
           if(!userDB)
           {
-            // this.router.navigateByUrl("register")
+            this.router.navigateByUrl("register")
             // await this.postUser({
             // })
           }
