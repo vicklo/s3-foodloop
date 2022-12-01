@@ -1,6 +1,6 @@
-import { userDto } from "./user.dto";
+import { UserDto } from "./user.dto";
 
-export interface  postCompanyDto {
+export interface  PostCompanyDto {
     owner:number;
     name:string;
     type:string;

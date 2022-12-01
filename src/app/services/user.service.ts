@@ -4,41 +4,35 @@ import { AuthService } from '@auth0/auth0-angular';
 import axios from 'axios';
 import { BehaviorSubject, Observable, of} from 'rxjs';
 import { environment } from 'src/environments/environment';
-import { userDto } from '../dto/user.dto';
+import { UserDto } from '../dto/user.dto';
 
 @Injectable({
   providedIn: 'root'
 })
 export class UserService {
-  private _currentUser = new BehaviorSubject<userDto>({});
+  private _currentUser = new BehaviorSubject<UserDto>({});
   public currentUser$ = this._currentUser.asObservable();
   get currentUser() { return this._currentUser.value; }
 
-  
-  constructor(private auth: AuthService, private router: Router) 
-  {}
+  constructor(private auth: AuthService, private router: Router){}
+
   private autchUserSubscription = this.auth.user$.subscribe(
-      async (user) => 
+      async (user) =>
       {
-        const u: userDto = user as userDto;
+        const u: UserDto = user as UserDto;
         if(u != null)
         {
           // set roles needed for now make them for prototype
           u.roles = ['seeProducts','editPostProducts','seeCompany','seeOrder']
-          const userDB: userDto = await this.getUserInfo(u.sub as string)
+          const userDB: UserDto = await this.getUserInfo(u.sub as string)
           u.CompanyId = userDB.CompanyId
           if(!userDB)
           {
-            //this.router.navigateByUrl("register")
+            // this.router.navigateByUrl("register")
             // await this.postUser({
-              
             // })
           }
-          console.log(u)
           this.setCurrentUser(u);
-        }
-        else
-        {
         }
       }
     );
@@ -47,8 +41,8 @@ export class UserService {
     this.autchUserSubscription.unsubscribe()
   }
 
-  private setCurrentUser(user: userDto) 
-  { 
+  private setCurrentUser(user: UserDto)
+  {
     this._currentUser.next(user);
     localStorage.setItem('user',JSON.stringify(user))
   }
@@ -63,6 +57,6 @@ export class UserService {
 
   private async postUser()
   {
-
+    this.getUserInfo("ewaja")
   }
 }

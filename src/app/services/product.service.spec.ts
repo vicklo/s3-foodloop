@@ -2,9 +2,7 @@ import { TestBed } from '@angular/core/testing';
 import { AuthModule } from '@auth0/auth0-angular';
 import { AxiosResponse } from 'axios';
 import {environment as env} from '../../environments/environment'
-import { postProductDto } from '../dto/postproduct.dto';
-import { productShop } from '../dto/productShop.dto';
-
+import { PostProductDto } from '../dto/postproduct.dto';
 
 import { ProductService } from './product.service';
 
@@ -27,8 +25,8 @@ describe('ProductService', () => {
   });
 
   it('Should say company is missing', async () => {
-    //setup
-    const product: postProductDto = 
+    // setup
+    const product: PostProductDto =
     {
       name:"test product",
       url: "www.test.nl",
@@ -36,31 +34,31 @@ describe('ProductService', () => {
       // company:1,
     }
 
-    //execution
+    // execution
     let response = "";
     await service.PostProduct(product).catch(error => response = error)
     expect(response).toBe('Company must be filled');
   });
 
   it('Should say name is missing', async () => {
-    //setup
-    const product: postProductDto = 
+    // setup
+    const product: PostProductDto =
     {
-      //name:"test product",
+      // name:"test product",
       url: "www.test.nl",
       description:"Heel mooi product",
       company:1,
     }
 
-    //execution
+    // execution
     let response = "";
     await service.PostProduct(product).catch(error => response = error)
     expect(response).toBe('Name must be filled');
   });
 
   it('Should say description is missing', async () => {
-    //setup
-    const product: postProductDto = 
+    // setup
+    const product: PostProductDto =
     {
       name:"test product",
       url: "www.test.nl",
@@ -68,68 +66,68 @@ describe('ProductService', () => {
       company:1,
     }
 
-    //execution
+    // execution
     let response = "";
     await service.PostProduct(product).catch(error => response = error)
     expect(response).toBe('Description must be filled');
   });
 
   it('Should say url is missing', async () => {
-    //setup
-    const product: postProductDto = 
+    // setup
+    const product: PostProductDto =
     {
       name:"test product",
-      //url: "www.test.nl",
+      // url: "www.test.nl",
       description:"Heel mooi product",
       company:1,
     }
 
-    //execution
+    // execution
     let response = "";
     await service.PostProduct(product).catch(error => response = error)
     expect(response).toBe('Url must be filled');
   });
 
   it('Should post product', async () => {
-    //setup
-    const product: postProductDto = 
+    // setup
+    const product: PostProductDto =
     {
       name:"test product",
       url: "www.test.nl",
       description:"Heel mooi product",
       company:1,
     }
-    //execution
-    let response:AxiosResponse = await service.PostProduct(product)
+    // execution
+    const response:AxiosResponse = await service.PostProduct(product)
     expect(response.status).toBe(200);
   });
 
   it('Should post product', async () => {
-    //setup
-    const product: postProductDto = 
+    // setup
+    const product: PostProductDto =
     {
       name:"test product",
       url: "www.test.nl",
       description:"Heel mooi product",
       company:1,
     }
-    //execution
-    let response:AxiosResponse = await service.PostProduct(product)
+    // execution
+    const response:AxiosResponse = await service.PostProduct(product)
     expect(response.status).toBe(200);
   });
 
   it('Should delete product', async () => {
-    //setup
-    let product: postProductDto = 
+    // setup
+    const product: PostProductDto =
     {
       name:"test product",
       url: "www.test.nl",
       description:"Heel mooi product",
       company:1,
     }
-    //execution
+    // execution
     const productresponse = await (await service.PostProduct(product)).data
-    let response:AxiosResponse = await service.DeleteProduct(productresponse.id)
+    const response:AxiosResponse = await service.DeleteProduct(productresponse.id)
     expect(response.status).toBe(200);
   });
 });

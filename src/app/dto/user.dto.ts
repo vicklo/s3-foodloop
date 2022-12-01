@@ -1,4 +1,4 @@
-export interface  userDto { 
+export interface  UserDto {
     given_name?: string;
     family_name?: string;
     nickname?: string;

@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import axios, { Axios, AxiosResponse } from 'axios';
 import { environment } from 'src/environments/environment';
-import { postCompanyDto } from '../dto/company.dto';
+import { PostCompanyDto } from '../dto/company.dto';
 import { UserService } from './user.service';
 
 @Injectable({
@@ -9,9 +9,7 @@ import { UserService } from './user.service';
 })
 export class CompanyService {
 
-  constructor() { }
-
-  public async postCompany(company: postCompanyDto): Promise<AxiosResponse>
+  public async postCompany(company: PostCompanyDto): Promise<AxiosResponse>
   {
     if(!company.adress)
       return Promise.reject('Company adress must be filled')

@@ -2,9 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { ModalDismissReasons, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ProductService } from 'src/app/services/product.service';
 import { FormGroup, FormControl } from '@angular/forms';
-import { postProductDto } from 'src/app/dto/postproduct.dto';
+import { PostProductDto } from 'src/app/dto/postproduct.dto';
 import { faCircleXmark, faPlus, faMinus } from '@fortawesome/free-solid-svg-icons';
-import { productShop } from 'src/app/dto/productShop.dto';
+import { ProductShop } from 'src/app/dto/productShop.dto';
 import { ShoppingCartService } from 'src/app/services/shopping-cart.service';
 import { UserService } from 'src/app/services/user.service';
 import { AxiosResponse } from 'axios';
@@ -14,14 +14,14 @@ import { AxiosResponse } from 'axios';
   templateUrl: './products.component.html',
   styleUrls: ['./products.component.scss']
 })
-export class ProductsComponent implements OnInit {
+export class ProductsComponent {
   public loading: boolean = true;
   public faCircleXmark = faCircleXmark;
   public faPlus = faPlus;
   public faMinus = faMinus;
-  private allProducts: Array<productShop> = [];
+  private allProducts: ProductShop[] = [];
   public searchWord:string = "";
-  public products: Array<productShop> = [];
+  public products: ProductShop[] = [];
   public productForm: FormGroup = new FormGroup({
     name: new FormControl(''),
     description: new FormControl(''),
@@ -30,9 +30,10 @@ export class ProductsComponent implements OnInit {
     amountIncart: new FormControl(0)
   })
 
-  constructor(private productService: ProductService,private userService: UserService, private modalService: NgbModal, private shoppingCartService: ShoppingCartService) { }
-
-  ngOnInit(): void {}
+  constructor(private productService: ProductService,
+    private userService: UserService,
+    private modalService: NgbModal,
+    private shoppingCartService: ShoppingCartService) { }
 
   private productListSubscription = this.productService.productList$.subscribe(
     (productList) =>
@@ -40,7 +41,6 @@ export class ProductsComponent implements OnInit {
       this.allProducts = productList;
       this.products = this.allProducts
       this.loading = this.productService.productsLoading
-     
     }
   )
 
@@ -70,8 +70,8 @@ export class ProductsComponent implements OnInit {
   {
     try
     {
-      const response: AxiosResponse = await this.productService.PostProduct(this.productForm.value as postProductDto)
-      if(response.status == 200)
+      const response: AxiosResponse = await this.productService.PostProduct(this.productForm.value as PostProductDto)
+      if(response.status === 200)
       {
         this.modalService.dismissAll()
         this.allProducts.push(response.data)
@@ -82,23 +82,24 @@ export class ProductsComponent implements OnInit {
     }
     catch(error)
     {
-      console.log(error)
+      throw error
     }
     return {} as AxiosResponse
   }
 
   public async deleteProduct(productId: number)
   {
+
     const response: AxiosResponse = await  this.productService.DeleteProduct(productId)
-    if(response.status == 200)
+    if(response.status === 200)
     {
-      const newlist = this.allProducts.filter(x => x.id != productId) 
+      const newlist = this.allProducts.filter(x => x.id !== productId)
       this.allProducts = newlist
       this.searchProducts(this.searchWord)
     }
   }
 
-  public editCart(product: productShop, newAmount: number)
+  public editCart(product: ProductShop, newAmount: number)
   {
     product.amountIncart = product.amountIncart as number +  newAmount;
     this.shoppingCartService.editList(product)

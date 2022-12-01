@@ -1,5 +1,5 @@
-import { Component, OnInit } from '@angular/core';
-import { Router, RouterEvent, Routes } from '@angular/router';
+import { Component } from '@angular/core';
+import { Router, Routes } from '@angular/router';
 import { AuthService } from '@auth0/auth0-angular';
 import { faCartShopping } from '@fortawesome/free-solid-svg-icons';
 import { ShoppingCartService } from 'src/app/services/shopping-cart.service';
@@ -9,15 +9,13 @@ import { ShoppingCartService } from 'src/app/services/shopping-cart.service';
   templateUrl: './navbar.component.html',
   styleUrls: ['./navbar.component.scss']
 })
-export class NavbarComponent implements OnInit {
+export class NavbarComponent {
   public routes: Routes = [];
   public faCartShopping = faCartShopping;
   public shoppingList = new Array();
 
-  constructor(public auth: AuthService, private router: Router, private shoppingCartService: ShoppingCartService) 
+  constructor(public auth: AuthService, private router: Router, private shoppingCartService: ShoppingCartService)
   {
-
-    
     this.routes = router.config;
   }
 
@@ -30,8 +28,6 @@ export class NavbarComponent implements OnInit {
     }
   )
 
-  ngOnInit(): void {
-  }
   ngOnDestroy() {
     this.shoppingListSubscription.unsubscribe()
   }

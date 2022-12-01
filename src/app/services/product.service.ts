@@ -3,8 +3,8 @@ import { AuthService } from '@auth0/auth0-angular';
 import axios, { AxiosResponse } from 'axios';
 import { BehaviorSubject } from 'rxjs';
 import { environment } from '../../environments/environment';
-import { postProductDto } from '../dto/postproduct.dto';
-import { productShop } from '../dto/productShop.dto';
+import { PostProductDto } from '../dto/postproduct.dto';
+import { ProductShop } from '../dto/productShop.dto';
 import { AuthenticateService } from './authenticate.service';
 import { ShoppingCartService } from './shopping-cart.service';
 
@@ -14,22 +14,21 @@ import { ShoppingCartService } from './shopping-cart.service';
 })
 export class ProductService {
   public token: any = "";
-  private shoppingCartList: Array<productShop> = new Array<productShop>();
+  private shoppingCartList: ProductShop[] = new Array<ProductShop>();
   public productsLoading = true;
-  private _productList = new BehaviorSubject<Array<productShop>>([]);
+  private _productList = new BehaviorSubject<ProductShop[]>([]);
   public productList$ = this._productList.asObservable();
   get productList() {return this._productList.value}
 
-  constructor(private authService: AuthService, private authenticateService: AuthenticateService, private shoppingCartService: ShoppingCartService) 
+  constructor(private authService: AuthService, private authenticateService: AuthenticateService, private shoppingCartService: ShoppingCartService)
   {
     this.startUp()
   }
 
   private async startUp()
   {
-    let list: Array<productShop> = new Array<productShop>;
+    let list: ProductShop[] = [];
     await this.getAllProducts().then(x => list = x)
-    console.log(list)
     this._productList.next(list)
   }
 
@@ -45,17 +44,17 @@ export class ProductService {
     this._productList.next(await this.getAllProducts())
   }
 
-  public async getAllProducts(): Promise<Array<productShop>>
-  { 
-    const products:Array<productShop> = new Array<productShop>()
+  public async getAllProducts(): Promise<ProductShop[]>
+  {
+    const products:ProductShop[] = new Array<ProductShop>()
     await axios.get(`${environment.apiBaseUrl}/products`)
-      .then(response => 
+      .then(response =>
         {
-            response.data.forEach((product: productShop) => {
+            response.data.forEach((product: ProductShop) => {
               let added = false;
               this.shoppingCartList.forEach(cartProduct =>
                 {
-                  if(cartProduct.id == product.id)
+                  if(cartProduct.id === product.id)
                   {
                     products.push(cartProduct);
                     added = true;
@@ -70,14 +69,12 @@ export class ProductService {
             });
             this.productsLoading = false;
         })
-        .catch(error => 
-          {
-            console.log(error)
-          })
+        .catch(error =>
+          { throw new Error(error)})
     return products
   }
 
-  public async PostProduct(product: postProductDto): Promise<AxiosResponse>
+  public async PostProduct(product: PostProductDto): Promise<AxiosResponse>
   {
     let response = {}
     if(!product.company)
@@ -88,10 +85,9 @@ export class ProductService {
       return Promise.reject('Name must be filled');
     if(!product.url)
       return Promise.reject('Url must be filled');
-      
     await axios.post(`${environment.apiBaseUrl}/product`,product)
       .then(data => response = data)
-      .catch(error => console.log(error))
+      .catch(error => {return Promise.reject(error)})
     return response as AxiosResponse;
   }
 
@@ -100,7 +96,7 @@ export class ProductService {
     let response = {};
     await axios.delete(`${environment.apiBaseUrl}/product/${productId}`)
       .then(data => response = data)
-      .catch(error => {throw new Error(error)})
+      .catch(error => {return Promise.reject(error)})
     return response as AxiosResponse;
   }
 }

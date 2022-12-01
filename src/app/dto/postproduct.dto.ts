@@ -1,4 +1,4 @@
-export interface  postProductDto { 
+export interface  PostProductDto{
     name?:string
     description?:string
     url?:string

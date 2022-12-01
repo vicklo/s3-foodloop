@@ -1,4 +1,4 @@
-export interface productShop
+export interface ProductShop
 {
     id?:number;
     name?:string;

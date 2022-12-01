@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { faMinus, faPlus } from '@fortawesome/free-solid-svg-icons';
-import { productShop } from 'src/app/dto/productShop.dto';
-import { userDto } from 'src/app/dto/user.dto';
+import { ProductShop } from 'src/app/dto/productShop.dto';
+import { UserDto } from 'src/app/dto/user.dto';
 import { ShoppingCartService } from 'src/app/services/shopping-cart.service';
 import { UserService } from 'src/app/services/user.service';
 
@@ -10,16 +10,14 @@ import { UserService } from 'src/app/services/user.service';
   templateUrl: './shopping-cart.component.html',
   styleUrls: ['./shopping-cart.component.scss']
 })
-export class ShoppingCartComponent implements OnInit {
-  public shoppingCart = new Array<productShop>();
+export class ShoppingCartComponent {
+  public shoppingCart = new Array<ProductShop>();
   public totalPrice: number = 0;
   public faPlus = faPlus;
   public faMinus = faMinus;
-  public user: userDto = {}
+  public user: UserDto = {}
   constructor(private shoppingCartService: ShoppingCartService, private userService: UserService) { }
 
-  ngOnInit(): void {
-  }
 
   private User = this.userService.currentUser$.subscribe(
     (user) => {this.user = user}
@@ -46,8 +44,7 @@ export class ShoppingCartComponent implements OnInit {
       return price
   }
 
-  
-  public editCart(product: productShop, newAmount: number)
+  public editCart(product: ProductShop, newAmount: number)
   {
     product.amountIncart = product.amountIncart as number + newAmount;
     this.shoppingCartService.editList(product)

@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { AuthService } from '@auth0/auth0-angular';
-import { userDto } from 'src/app/dto/user.dto';
+import { UserDto } from 'src/app/dto/user.dto';
 import { CompanyService } from 'src/app/services/company.service';
 
 @Component({
@@ -9,10 +9,10 @@ import { CompanyService } from 'src/app/services/company.service';
   templateUrl: './sign-up.component.html',
   styleUrls: ['./sign-up.component.scss']
 })
-export class SignUpComponent implements OnInit {
+export class SignUpComponent {
 
   constructor(private auth: AuthService, private comapnyService:CompanyService) { }
-  public userInfo: userDto = {}
+  public userInfo: UserDto = {}
   public companyForm: FormGroup = new FormGroup({
     name: new FormControl(''),
     adress: new FormControl(''),
@@ -20,10 +20,8 @@ export class SignUpComponent implements OnInit {
     subscription: new FormControl('Free'),
   })
   private userSubscription = this.auth.user$.subscribe(
-    (user) => this.userInfo = user as userDto
+    (user) => this.userInfo = user as UserDto
   )
-  ngOnInit(): void {
-  }
 
   ngOnDestroy()
   {

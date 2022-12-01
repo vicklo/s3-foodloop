@@ -1,6 +1,6 @@
 import { TestBed } from '@angular/core/testing';
 import { AxiosResponse } from 'axios';
-import { postCompanyDto } from '../dto/company.dto';
+import { PostCompanyDto } from '../dto/company.dto';
 
 import { CompanyService } from './company.service';
 
@@ -18,8 +18,8 @@ describe('CompanyService', () => {
 
 
   it('Should post company', async () => {
-    //setup
-    const company: postCompanyDto = 
+    // setup
+    const company: PostCompanyDto =
     {
       owner: 1,
       name: "victor company",
@@ -27,9 +27,8 @@ describe('CompanyService', () => {
       adress: "sint odastraat 22",
       postCode: "6002BD",
     }
-    //execution
-    let response:AxiosResponse = await service.postCompany(company)
-    
+    // execution
+    const response:AxiosResponse = await service.postCompany(company)
     expect(response.status).toBe(200);
   });
 

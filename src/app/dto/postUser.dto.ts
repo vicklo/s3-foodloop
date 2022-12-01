@@ -1,4 +1,4 @@
-export interface  postUserDto { 
+export interface  PostUserDto {
     firstName?:string
     lastName?:string
     authId?:string

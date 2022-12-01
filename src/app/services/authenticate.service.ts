@@ -7,8 +7,6 @@ import { environment } from 'src/environments/environment';
 })
 export class AuthenticateService {
 
-  constructor() { }
-
   public async getToken()
   {
     let token: string = "";
@@ -20,11 +18,10 @@ export class AuthenticateService {
         "audience":"localhost:3000",
         "grant_type":"client_credentials"
       },
-      {headers}).then(data => 
+      {headers}).then(data =>
         {
           token = data.data
         })
-    console.log(token)
     return token;
   }
 }
