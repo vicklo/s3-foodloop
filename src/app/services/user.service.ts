@@ -4,6 +4,7 @@ import { AuthService } from '@auth0/auth0-angular';
 import axios from 'axios';
 import { BehaviorSubject} from 'rxjs';
 import { environment } from 'src/environments/environment';
+import { PostUserDto } from '../dto/postUser.dto';
 import { UserDto } from '../dto/user.dto';
 
 @Injectable({
@@ -47,16 +48,25 @@ export class UserService {
     localStorage.setItem('user',JSON.stringify(user))
   }
 
+  public async postUser(user:PostUserDto)
+  {
+    let userinfo = {}
+    await axios.post(`${environment.apiBaseUrl}/user`,{data:user})
+      .then(data =>
+        {
+          userinfo = data.data
+        })
+    return userinfo
+  }
+
   private async getUserInfo(authId: string)
   {
     let userinfo = {}
     await axios.get(`${environment.apiBaseUrl}/user/${authId}`)
-      .then(data => userinfo = data.data)
+      .then(data =>
+        {
+          userinfo = data.data
+        })
     return userinfo
-  }
-
-  private async postUser()
-  {
-    this.getUserInfo("ewaja")
   }
 }

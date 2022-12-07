@@ -1,8 +1,11 @@
 import { Component } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
+import { Router } from '@angular/router';
 import { AuthService } from '@auth0/auth0-angular';
 import { UserDto } from 'src/app/dto/user.dto';
 import { CompanyService } from 'src/app/services/company.service';
+import { UserService } from 'src/app/services/user.service';
+import { PostCompanyDto } from '../../dto/company.dto';
 
 @Component({
   selector: 'app-sign-up',
@@ -11,16 +14,23 @@ import { CompanyService } from 'src/app/services/company.service';
 })
 export class SignUpComponent {
 
-  constructor(private auth: AuthService, private comapnyService:CompanyService) { }
+  constructor(private auth: AuthService,
+    private comapnyService:CompanyService,
+    private router: Router,
+    private userSercvice: UserService) { }
   public userInfo: UserDto = {}
   public companyForm: FormGroup = new FormGroup({
+
     name: new FormControl(''),
     adress: new FormControl(''),
-    postcode: new FormControl(''),
-    subscription: new FormControl('Free'),
+    postCode: new FormControl(''),
+    type: new FormControl('Free'),
   })
   private userSubscription = this.auth.user$.subscribe(
-    (user) => this.userInfo = user as UserDto
+    (user) => {
+      this.userInfo = user as UserDto;
+      this.companyForm.addControl("owner",new FormControl(user?.sub))
+    }
   )
 
   ngOnDestroy()
@@ -28,6 +38,22 @@ export class SignUpComponent {
     this.userSubscription.unsubscribe()
   }
 
+  async postProduct()
+  {
+    const response =  await this.comapnyService.postCompany(this.companyForm.value as PostCompanyDto)
+    const user = await this.userSercvice.postUser({
+      firstName: this.userSercvice.currentUser.given_name,
+      lastName:this.userSercvice.currentUser.family_name,
+      authId:this.userSercvice.currentUser.sub,
+      company: response.data.id
+    })
+    if(response.status === 200)
+    {
+      this.router.navigateByUrl("products")
+
+    }
+
+  }
 
 
 }
