@@ -1,6 +1,5 @@
 import { TestBed } from '@angular/core/testing';
 import { AuthModule } from '@auth0/auth0-angular';
-import { AxiosResponse } from 'axios';
 import {environment as env} from '../../environments/environment'
 import { PostProductDto } from '../dto/postproduct.dto';
 
@@ -87,33 +86,4 @@ describe('ProductService', () => {
     await service.PostProduct(product).catch(error => response = error)
     expect(response).toBe('Url must be filled');
   });
-
-  // it('Should post product', async () => {
-  //   // setup
-  //   const product: PostProductDto =
-  //   {
-  //     name:"test product",
-  //     url: "www.test.nl",
-  //     description:"Heel mooi product",
-  //     company:1,
-  //   }
-  //   // execution
-  //   const response:AxiosResponse = await service.PostProduct(product)
-  //   expect(response.status).toBe(200);
-  // });
-
-  // it('Should delete product', async () => {
-  //   // setup
-  //   const product: PostProductDto =
-  //   {
-  //     name:"test product",
-  //     url: "www.test.nl",
-  //     description:"Heel mooi product",
-  //     company:1,
-  //   }
-  //   // execution
-  //   const productresponse = await (await service.PostProduct(product)).data
-  //   const response:AxiosResponse = await service.DeleteProduct(productresponse.id)
-  //   expect(response.status).toBe(200);
-  // });
 });
