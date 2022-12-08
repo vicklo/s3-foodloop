@@ -17,7 +17,7 @@ COPY . .
 RUN npm ci && npm run build
 
 FROM nginx:alpine
-COPY --from=foodloop-build /app/dist/foodloop /usr/share/nginx/html
+COPY --from=foodloop-build app/dist/foodloop /usr/share/nginx/html
 EXPOSE 80
 
 # stage 2
