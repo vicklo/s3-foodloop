@@ -41,19 +41,19 @@ export class SignUpComponent {
   async postProduct()
   {
     const response =  await this.comapnyService.postCompany(this.companyForm.value as PostCompanyDto)
-    const user = await this.userSercvice.postUser({
-      firstName: this.userSercvice.currentUser.given_name,
-      lastName:this.userSercvice.currentUser.family_name,
-      authId:this.userSercvice.currentUser.sub,
-      company: response.data.id
-    })
     if(response.status === 200)
     {
-      this.router.navigateByUrl("products")
-
+      await this.userSercvice.postUser({
+        firstName: this.userSercvice.currentUser.given_name,
+        lastName:this.userSercvice.currentUser.family_name,
+        authId:this.userSercvice.currentUser.sub,
+        company: response.data.id
+      })
+      .then(userResponse =>
+        {
+          this.router.navigateByUrl("products")
+        })
+        .catch(error => Promise.reject(error))
     }
-
   }
-
-
 }
