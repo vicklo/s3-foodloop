@@ -29,7 +29,7 @@ RUN npm ci && npm run build
 
 # stage 2
 
-FROM nginx:13.7.0
+FROM nginx:alpine
 COPY --from=ng-build /app/dist/foodloop /usr/share/nginx/html
 EXPOSE 80
 
