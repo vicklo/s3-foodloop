@@ -14,7 +14,7 @@
 FROM node:17.7.2 AS foodloop-build
 WORKDIR /app
 COPY . .
-RUN npm ci && npm run build
+RUN npm install && npm run build
 
 FROM nginx:alpine
 COPY --from=foodloop-build app/dist/foodloop /usr/share/nginx/html
