@@ -36,7 +36,7 @@ describe('ProductService', () => {
 
     // execution
     let response = "";
-    await service.PostProduct(product).catch(error => response = error)
+   await service.PostProduct(product).catch(error => response = error)
     expect(response).toBe('Company must be filled');
   });
 
