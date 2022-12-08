@@ -3,9 +3,9 @@ WORKDIR /app
 COPY package*.json .
 RUN npm ci && npm cache clean --force
 COPY . . 
-RUN npm run build
-EXPOSE 4200
-CMD ["npm", "run", "start"]
+# RUN npm run build
+# EXPOSE 4200
+# CMD ["npm", "run", "start"]
 
 FROM nginx:1.17.10-alpine
 EXPOSE 80
