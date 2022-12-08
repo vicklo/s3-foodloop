@@ -18,8 +18,18 @@
 
 # stage 2
 
-FROM nginx:alpine
-COPY /dist/foodloop /usr/share/nginx/html
-EXPOSE 80
+# FROM nginx:alpine
+# COPY /dist/foodloop /usr/share/nginx/html
+# EXPOSE 80
 
+FROM node:17.7.2 AS ng-build
+WORKDIR /app
+COPY . .
+RUN npm ci && npm run build
+
+# stage 2
+
+FROM nginx:13.7.0
+COPY --from=ng-build /app/dist/foodloop /usr/share/nginx/html
+EXPOSE 80
 
