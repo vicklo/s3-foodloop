@@ -1,8 +1,6 @@
-FROM node:16
-run mkdir -p /app
+FROM node:12.7-alpine AS build
 WORKDIR /app/src/app
 COPY package.json package-lock.json ./
 RUN npm install
 COPY . .
-EXPOSE 4200
-cmd ['npm','run','start']
+RUN npm run build
