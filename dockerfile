@@ -11,15 +11,15 @@
 # EXPOSE 80   
 # COPY --from=builder /app/dist/foodloop /usr/share/nginx/html
 
-FROM node:17.7.2 AS my-app-build
-WORKDIR /app
-COPY . .
-RUN npm ci && npm run build
+# FROM node:17.7.2 AS my-app-build
+# WORKDIR /app
+# COPY . .
+# RUN npm ci && npm run build
 
 # stage 2
 
 FROM nginx:alpine
-COPY --from=my-app-build /app/dist/foodloop /usr/share/nginx/html
+COPY /dist/foodloop /usr/share/nginx/html
 EXPOSE 80
 
 
