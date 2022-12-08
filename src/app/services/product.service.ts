@@ -68,7 +68,7 @@ export class ProductService {
             this.productsLoading = false;
         })
         .catch(error =>
-          { throw new Error(error)})
+          { return Promise.reject(error)})
     return products
   }
 
