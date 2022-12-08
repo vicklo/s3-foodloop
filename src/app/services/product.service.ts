@@ -5,7 +5,6 @@ import { BehaviorSubject } from 'rxjs';
 import { environment } from '../../environments/environment';
 import { PostProductDto } from '../dto/postproduct.dto';
 import { ProductShop } from '../dto/productShop.dto';
-import { AuthenticateService } from './authenticate.service';
 import { ShoppingCartService } from './shopping-cart.service';
 
 
@@ -20,7 +19,7 @@ export class ProductService {
   public productList$ = this._productList.asObservable();
   get productList() {return this._productList.value}
 
-  constructor(private authService: AuthService, private authenticateService: AuthenticateService, private shoppingCartService: ShoppingCartService)
+  constructor(private authService: AuthService, private shoppingCartService: ShoppingCartService)
   {
     this.startUp()
   }

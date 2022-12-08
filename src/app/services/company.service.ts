@@ -2,13 +2,11 @@ import { Injectable } from '@angular/core';
 import axios, { AxiosResponse } from 'axios';
 import { environment } from 'src/environments/environment';
 import { PostCompanyDto } from '../dto/company.dto';
-import { UserService } from './user.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class CompanyService {
-  constructor(private userService: UserService){}
 
   public async postCompany(company: PostCompanyDto): Promise<AxiosResponse>
   {

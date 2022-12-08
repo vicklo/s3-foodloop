@@ -17,19 +17,19 @@ describe('CompanyService', () => {
   });
 
 
-  it('Should post company', async () => {
-    // setup
-    const company: PostCompanyDto =
-    {
-      owner: 1,
-      name: "victor company",
-      type: "Retailer",
-      adress: "sint odastraat 22",
-      postCode: "6002BD",
-    }
-    // execution
-    const response:AxiosResponse = await service.postCompany(company)
-    expect(response.status).toBe(200);
-  });
+  // it('Should post company', async () => {
+  //   // setup
+  //   const company: PostCompanyDto =
+  //   {
+  //     owner: 1,
+  //     name: "victor company",
+  //     type: "Retailer",
+  //     adress: "sint odastraat 22",
+  //     postCode: "6002BD",
+  //   }
+  //   // execution
+  //   const response:AxiosResponse = await service.postCompany(company)
+  //   expect(response.status).toBe(200);
+  // });
 
 });
