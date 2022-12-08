@@ -1,6 +1,8 @@
-#stage 1
-FROM node:latest as node
+FROM node:17.7.2
 WORKDIR /app
-COPY . .
-RUN npm install
+COPY package*.json .
+RUN npm ci && npm cache clean --force
+COPY . . 
 RUN npm run build
+EXPOSE 4200
+CMD ["npm", "run", "start"]
