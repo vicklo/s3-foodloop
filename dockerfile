@@ -22,14 +22,24 @@
 # COPY /dist/foodloop /usr/share/nginx/html
 # EXPOSE 80
 
-FROM node:17.7.2 AS ng-build
+# FROM node:17.7.2 AS ng-build
+# WORKDIR /app
+
+# RUN npm ci && npm run build
+# COPY . .
+# CMD [ "npm","run","start" ]
+# EXPOSE 4200
+
+FROM node:17.7.2
 WORKDIR /app
-COPY . .
-RUN npm ci && npm run build
+COPY package.json .
+RUN npm ci && npm cache clean --force
+COPY . . 
+RUN npm run build
+EXPOSE 4200
+CMD ["npm", "run", "start"]
 
 # stage 2
 
-FROM nginx:alpine
-COPY --from=ng-build /app/dist/foodloop /usr/share/nginx/html
-EXPOSE 80
+
 
