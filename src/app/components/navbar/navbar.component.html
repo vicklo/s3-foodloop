@@ -4,7 +4,8 @@
     <div class="spacer"></div>
     <ul class="navbar-nav">
       <span *ngFor="let route of routes">
-          <span *ngIf="(auth.isAuthenticated$ | async) == false">
+          <!-- <span *ngIf="(auth.isAuthenticated$ | async) == false"> -->
+            <span>
             <li class="m-2" *ngIf="!route.data" >
               <a
                 class="fas fa-bars"
@@ -14,7 +15,8 @@
               >
             </li>
           </span>
-          <span *ngIf="(auth.isAuthenticated$ | async) == true">
+          <!-- <span *ngIf="(auth.isAuthenticated$ | async) == true"> -->
+            <span>
             <span *ngIf="route.path != 'register'">
               <li class="m-2" *ngIf="route.path != 'shopping-cart' or">
                 <a

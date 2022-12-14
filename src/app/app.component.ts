@@ -9,6 +9,6 @@ import { UserService } from './services/user.service';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-  constructor(public auth: AuthService, public router: Router,private userService: UserService){}
+  constructor(public router: Router){}
   title = 'foodloop';
 }

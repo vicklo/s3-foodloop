@@ -1,5 +1,4 @@
 import { Component } from '@angular/core';
-import { UserService } from 'src/app/services/user.service';
 
 @Component({
   selector: 'app-pricing',
@@ -7,6 +6,4 @@ import { UserService } from 'src/app/services/user.service';
   styleUrls: ['./pricing.component.scss']
 })
 export class PricingComponent {
-
-  constructor(private userService: UserService) { }
 }

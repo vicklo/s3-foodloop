@@ -1,8 +1,10 @@
 <div>
-    <button *ngIf="(auth.isAuthenticated$| async) == false" class="btn btn-primary"  (click)="loginWithRedirect()">
-        login
+    <!-- <button *ngIf="(auth.isAuthenticated$| async) == false" class="btn btn-primary"  (click)="loginWithRedirect()"> -->
+    <button>
+            login
     </button>
-    <button *ngIf="(auth.isAuthenticated$| async) == true" class="btn btn-danger" (click)="logoutWithRedirect()">
+    <button>
+    <!-- <button *ngIf="(auth.isAuthenticated$| async) == true" class="btn btn-danger" (click)="logoutWithRedirect()"> -->
         logout
     </button>
 </div>
