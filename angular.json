@@ -108,7 +108,7 @@
           },
           "configurations": {
             "production": {
-              "devServerTarget": "foodloop:serve:production"
+              "devServerTarget": "foodloop:serve:development"
             }
           }
         },
@@ -122,7 +122,7 @@
         "ct": {
           "builder": "@cypress/schematic:cypress",
           "options": {
-            "devServerTarget": "foodloop:serve",
+            "devServerTarget": "foodloop:serve:development",
             "watch": true,
             "headless": false,
             "testingType": "component"
@@ -136,7 +136,7 @@
         "e2e": {
           "builder": "@cypress/schematic:cypress",
           "options": {
-            "devServerTarget": "foodloop:serve",
+            "devServerTarget": "foodloop:serve:development",
             "watch": true,
             "headless": false
           },

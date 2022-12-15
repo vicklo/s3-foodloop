@@ -15,32 +15,32 @@
                
             <div class="form-outline mb-3">
                 <label class="form-label" for="form3Example4">Company dubscription</label>
-                <select  formControlName="type" class="form-select form-control-lg" aria-label="Default select example">
-                    <option selected>Free</option>
-                    <option value="Retailer">Retailer</option>
-                    <option value="Brand">Brand</option>
+                <select id="subscription" formControlName="type" class="form-select form-control-lg" aria-label="Default select example">
+                    <option id="subscription-free" selected>Free</option>
+                    <option id="subscription-retailer" value="Retailer">Retailer</option>
+                    <option id="subscription-brand" value="Brand">Brand</option>
                   </select>
               </div>
            
               
               <div class="form-outline mb-3">
                 <label class="form-label" for="form3Example4">Company name</label>
-                <input formControlName="name" type="" id="form3Example4" class="form-control form-control-lg"
+                <input  formControlName="name" type="" id="name" class="form-control form-control-lg"
                   placeholder="Enter company name" />
               </div>              
               <div class="form-outline mb-3">
                 <label class="form-label" for="form3Example4">Company adress</label>
-                <input formControlName="adress" type="" id="form3Example4" class="form-control form-control-lg"
+                <input formControlName="adress" type="" id="adress" class="form-control form-control-lg"
                   placeholder="Enter company adress" />
               </div>              
               <div class="form-outline mb-3">
                 <label class="form-label" for="form3Example4">Company postcode</label>
-                <input formControlName="postCode" type="" id="form3Example4" class="form-control form-control-lg"
+                <input formControlName="postCode" type="" id="postcode" class="form-control form-control-lg"
                   placeholder="Enter company postcode" />
               </div>
   
             <div class="text-center text-lg-start mt-4 pt-2">
-              <button type="button" class="btn btn-danger w-100"  (click)="postProduct()">Login</button>
+              <button id="btn-submit" type="button" class="btn btn-danger w-100"  (click)="postProduct()">Login</button>
             </div>
           </form>
         </div>

@@ -37,6 +37,7 @@
     </div>
     <div class="modal-footer">
       <button
+        id="save-product-btn"
         type="button"
         class="btn btn-outline-dark"
         (click)="postProduct()"
@@ -47,6 +48,7 @@
   </ng-template>
 
   <!-- Buttons and search -->
+  <h1>Products</h1>
   <div class="input-group mb-3">
     <input
       type="text"
@@ -67,7 +69,7 @@
   <button class="btn btn-primary m-1" (click)="RefreshAllProducts()">
     Refresh
   </button>
-  <button class="btn btn-primary m-1" (click)="open(content)">
+  <button class="btn btn-primary m-1" id="createProduct" (click)="open(content)">
     Create Product</button
   ><br />
 
@@ -78,8 +80,8 @@
   </div>
 
   <!-- all cards -->
-  <div class="row row-cols-1 row-cols-md-6 g-4 mt-1">
-    <div class="col"  *ngFor="let product of products">
+  <div class="row row-cols-1 row-cols-md-6 g-4 mt-1" id="products">
+    <div class="col" id="product"  *ngFor="let product of products">
       <div class="card shadow">
         <div class="card-body">
           <div class="d-flex">
@@ -88,6 +90,7 @@
               (click)="deleteProduct(product.id!)"
               style="color: red; font-size: medium"
               class="w-full align-right"
+              id="delete-product"
               [icon]="faCircleXmark"
             ></fa-icon>
           </div>
@@ -117,7 +120,6 @@
               </div>
               <button class="col btn btn-danger btn-md" style="border-radius:  0px 0px .375rem 0px; " (click)="editCart(product, + 1)">
                 <fa-icon
-                  
                   [icon]="faPlus"
                 ></fa-icon>
               </button>

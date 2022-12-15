@@ -40,12 +40,13 @@ export class SignUpComponent {
 
   async postProduct()
   {
+    await this.auth.isAuthenticated$;
     const response =  await this.comapnyService.postCompany(this.companyForm.value as PostCompanyDto)
     if(response.status === 200)
     {
       await this.userSercvice.postUser({
-        firstName: this.userSercvice.currentUser.given_name,
-        lastName:this.userSercvice.currentUser.family_name,
+        firstName: this.userSercvice.currentUser.given_name || "john",
+        lastName:this.userSercvice.currentUser.family_name || "doe",
         authId:this.userSercvice.currentUser.sub,
         company: response.data.id
       })

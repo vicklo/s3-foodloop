@@ -51,7 +51,7 @@ export class UserService {
   public async postUser(user:PostUserDto)
   {
     let userinfo = {}
-    await axios.post(`${environment.apiBaseUrl}/user`,{data:user})
+    await axios.post(`${environment.apiBaseUrl}/user`,user)
       .then(data =>
         {
           userinfo = data.data

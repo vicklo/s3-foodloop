@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { Router, Routes } from '@angular/router';
-// import { AuthService } from '@auth0/auth0-angular';
+import { AuthService } from '@auth0/auth0-angular';
 import { faCartShopping } from '@fortawesome/free-solid-svg-icons';
 import { ShoppingCartService } from 'src/app/services/shopping-cart.service';
 
@@ -14,8 +14,7 @@ export class NavbarComponent {
   public faCartShopping = faCartShopping;
   public shoppingList = new Array();
 
-  // constructor(public auth: AuthService, private router: Router, private shoppingCartService: ShoppingCartService)
-  constructor( private router: Router, private shoppingCartService: ShoppingCartService)
+  constructor(public auth: AuthService, private router: Router, private shoppingCartService: ShoppingCartService)
   {
     this.routes = router.config;
   }

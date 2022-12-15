@@ -1,5 +1,4 @@
-import { Component } from '@angular/core';
-// import { AuthService } from '@auth0/auth0-angular';
+import { Component } from '@angular/core';import { AuthService } from '@auth0/auth0-angular';
 
 @Component({
   selector: 'app-login-button',
@@ -8,16 +7,15 @@ import { Component } from '@angular/core';
 })
 export class LoginButtonComponent {
 
-  // constructor(public auth: AuthService) { }
+  constructor(public auth: AuthService) { }
 
   loginWithRedirect(): void{
-    // if build app won't start
-    // this.auth.loginWithRedirect();
+    this.auth.loginWithRedirect();
   }
 
   logoutWithRedirect(): void{
     sessionStorage.clear();
-    // this.auth.logout();
+    this.auth.logout();
   }
 
 }
