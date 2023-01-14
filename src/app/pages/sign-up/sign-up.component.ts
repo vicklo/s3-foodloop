@@ -5,7 +5,7 @@ import { AuthService } from '@auth0/auth0-angular';
 import { UserDto } from 'src/app/dto/user.dto';
 import { CompanyService } from 'src/app/services/company.service';
 import { UserService } from 'src/app/services/user.service';
-import { PostCompanyDto } from '../../dto/company.dto';
+import { PostCompanyDto } from '../../dto/postCompany.dto';
 
 @Component({
   selector: 'app-sign-up',

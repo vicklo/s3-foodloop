@@ -4,5 +4,6 @@ export interface ProductShop
     name?:string;
     description?:string;
     amountIncart?:number;
-    price?:number;
+    price:number;
+    url?:string;
 }

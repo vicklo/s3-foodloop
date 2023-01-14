@@ -27,6 +27,7 @@ export class ProductsComponent {
     description: new FormControl(''),
     url: new FormControl(''),
     company: new FormControl(1),
+    price: new FormControl(0),
     amountIncart: new FormControl(0)
   })
 

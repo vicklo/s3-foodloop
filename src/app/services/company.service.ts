@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import axios, { AxiosResponse } from 'axios';
 import { environment } from 'src/environments/environment';
-import { PostCompanyDto } from '../dto/company.dto';
+import { PostCompanyDto } from '../dto/postCompany.dto';
 
 @Injectable({
   providedIn: 'root'

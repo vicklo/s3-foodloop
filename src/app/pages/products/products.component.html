@@ -33,6 +33,13 @@
           class="form-control"
           formControlName="url"
         />
+        <label for="url" class="form-label">Price</label>
+        <input
+          id="url"
+          type="number"
+          class="form-control"
+          formControlName="price"
+        />
       </form>
     </div>
     <div class="modal-footer">
@@ -94,6 +101,7 @@
               [icon]="faCircleXmark"
             ></fa-icon>
           </div>
+          <img src={{product.url}} height="100" class="rounded mx-auto d-block" alt="product image"/>
           <h5 class="card-title" style="height: 70px">{{ product.name }}</h5>
           <p class="card-text" style="height: 80px">{{ product.description }}</p>
           <h5 class="card-title" >€{{ product.price }}</h5>

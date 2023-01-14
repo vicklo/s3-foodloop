@@ -85,7 +85,9 @@ export class ProductService {
       return Promise.reject('Url must be filled');
     await axios.post(`${environment.apiBaseUrl}/product`,product)
       .then(data => response = data)
-      .catch(error => {return Promise.reject(error)})
+      .catch(error => {
+        return Promise.reject(error)
+      })
     return response as AxiosResponse;
   }
 

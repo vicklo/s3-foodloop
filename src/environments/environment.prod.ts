@@ -6,7 +6,7 @@ export const environment = {
   {
     domain,
     clientId,
-    redirectUri: `http://localhost:4200/register`
+    redirectUri: `http://127.0.0.1:8080`
   },
   apiBaseUrl: "http://localhost:3000",
   apiSecret: "i8h6EFqBwDWq2H8LFINZOcQNusLmHZgFGuzVmg4gEtZQ-kQVn9Rru0pMs66Ws6VN",

@@ -3,4 +3,5 @@ export interface  PostProductDto{
     description?:string
     url?:string
     company?:number
+    price?:number
 }

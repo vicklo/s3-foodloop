@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { DebugEventListener, Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthService } from '@auth0/auth0-angular';
 import axios from 'axios';
@@ -27,6 +27,8 @@ export class UserService {
           u.roles = ['seeProducts','editPostProducts','seeCompany','seeOrder']
           const userDB: UserDto = await this.getUserInfo(u.sub as string)
           u.CompanyId = userDB.CompanyId
+          u.company = userDB.company
+          u.userId = userDB.userId
           if(!userDB)
           {
             this.router.navigateByUrl("register")
@@ -59,13 +61,16 @@ export class UserService {
     return userinfo
   }
 
-  private async getUserInfo(authId: string)
+  private async getUserInfo(authId: string): Promise<UserDto>
   {
-    let userinfo = {}
+    let userinfo:UserDto = {}
     await axios.get(`${environment.apiBaseUrl}/user/${authId}`)
       .then(data =>
         {
           userinfo = data.data
+          userinfo.CompanyId = data.data.company.id
+          userinfo.company = data.data.company
+          userinfo.userId = data.data.id
         })
     return userinfo
   }
